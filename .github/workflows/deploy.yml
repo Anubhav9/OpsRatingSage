@@ -22,8 +22,12 @@ jobs:
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws configure set region ${{ secrets.AWS_REGION }}
-
+        
+    - name: Create ZIP file
+      run: |
+        zip lambda_function.zip lambda_function.py
+    
     - name: Update Lambda Function
       run: |
-        aws lambda update-function-code --function-name ratingsInfo --zip-file fileb://lambda_function.py.zip
+        aws lambda update-function-code --function-name ratingsInfo --zip-file fileb://lambda_function.zip
 
