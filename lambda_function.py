@@ -1,9 +1,9 @@
-import boto3
 import json
 import logging
 import os
 import requests
 from datetime import datetime
+import boto3
 
 print('Loading function')
 dynamo = boto3.client('dynamodb')
