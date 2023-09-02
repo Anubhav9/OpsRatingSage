@@ -145,4 +145,3 @@ def lambda_handler(event, context):
             return json.dumps({"status_code":200,"message":"OK"})
         else:
             return json.dumps({"status_code":400,"message":"Bad Request Received"})
-            
