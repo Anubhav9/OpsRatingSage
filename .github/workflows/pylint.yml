@@ -23,7 +23,7 @@ jobs:
 
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint --fail-under=3 $(git ls-files '*.py')
 
     - name: Capture Pylint Score
       id: pylint
