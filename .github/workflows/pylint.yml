@@ -24,15 +24,3 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint --fail-under=3 $(git ls-files '*.py')
-
-    - name: Capture Pylint Score
-      id: pylint
-      run: |
-        pylint_score=$(pylint your_python_file.py --score=y)
-        echo "::set-output name=pylint_score::$pylint_score"
-
-    - name: Check Pylint Score
-      run: |
-        if [[ ${{ steps.pylint.outputs.pylint_score }} -lt 3 ]]; then
-          echo "Pylint score is below the minimum required score."
-          exit 1
