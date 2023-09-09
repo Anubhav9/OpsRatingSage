@@ -1,4 +1,4 @@
-name: Send Slack Message via Bot to a specific channel intimating about deployments
+name: Send Slack Message via Bot
 
 on:
   push:
@@ -15,5 +15,8 @@ jobs:
 
       - name: Send Slack Message
         run: |
-         curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, @Anubhav Sanyal, Lambda Function deployment has been triggered ! This is not an approval flow but just for your intimation. Sayonara"}' https://hooks.slack.com/services/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
+          curl -X POST -H "Content-type: application/json" --data '{
+            "channel": "#aws-deployments",
+            "text": "Hello @Anubhav Sanyal, AWS Lambda function deployment has been triggered. This is not an approval flow but just for your intimmation. Sayonara!"
+          }' "https://slack.com/api/chat.postMessage?token=${{ secrets.SLACK_BOT_TOKEN }}"
 
