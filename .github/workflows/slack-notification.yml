@@ -19,4 +19,5 @@ jobs:
             "channel": "#aws-deployments",
             "text": "Hello @Anubhav Sanyal, AWS Lambda function deployment has been triggered. This is not an approval flow but just for your intimmation. Sayonara!"
           }' "https://slack.com/api/chat.postMessage?token=${{ secrets.SLACK_BOT_TOKEN }}"
+          
 
