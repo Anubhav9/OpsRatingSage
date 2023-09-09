@@ -144,5 +144,4 @@ def lambda_handler(event, context):
             print("Ratings recieved is ",ratings)
             return json.dumps({"status_code":200,"message":"OK"})
         else:
-            return json.dumps({"status_code":400,"message":"Bad Request Received"})
-            
+            return json.dumps({"status_code":400,"message":"Bad Request Received"})       
