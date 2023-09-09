@@ -15,9 +15,10 @@ jobs:
 
       - name: Send Slack Message
         run: |
-          curl -X POST -H "Content-type: application/json" --data '{
+          curl -X POST -H "Content-type: application/json" -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+          --data '{
             "channel": "#aws-deployments",
             "text": "Hello @Anubhav Sanyal, AWS Lambda function deployment has been triggered. This is not an approval flow but just for your intimmation. Sayonara!"
-          }' "https://slack.com/api/chat.postMessage?token=${{ secrets.SLACK_BOT_TOKEN }}"
+          }' "https://slack.com/api/chat.postMessage"
           
 
