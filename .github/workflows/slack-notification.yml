@@ -1,0 +1,19 @@
+name: Send Slack Message via Bot to a specific channel intimating about deployments
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-slack-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send Slack Message
+        run: |
+         curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, @Anubhav Sanyal, Lambda Function deployment has been triggered ! This is not an approval flow but just for your intimation. Sayonara"}' https://hooks.slack.com/services/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
+
