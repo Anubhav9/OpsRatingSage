@@ -14,11 +14,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Send Slack Message
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: |
-          curl -X POST -H "Content-type: application/json" -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
-          --data '{
-            "channel": "#aws-deployments",
-            "text": "Hello @Anubhav Sanyal, AWS Lambda function deployment has been triggered. This is not an approval flow but just for your intimmation. Sayonara!"
-          }' "https://slack.com/api/chat.postMessage"
-          
-
+          curl -X POST -H "Content-type: application/json" \
+               -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+               --data '{
+                 "channel": "#aws-deployments",
+                 "text": "Hello @Anubhav Sanyal , a deployment has been triggered for Lambda Function. This is not an approval flow but just for intimation. Sayonara!"
+               }' "https://slack.com/api/chat.postMessage"
