@@ -21,5 +21,5 @@ jobs:
                -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
                --data '{
                  "channel": "#aws-deployments",
-                 "text": "Hello @Anubhav Sanyal , a deployment has been triggered for Lambda Function. This is not an approval flow but just for intimation. Sayonara!"
+                 "text": "Hello <@U048NU0SXCJ> , a deployment has been triggered for Lambda Function. This is not an approval flow but just for intimation. Sayonara!"
                }' "https://slack.com/api/chat.postMessage"
