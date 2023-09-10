@@ -1,0 +1,61 @@
+name: Send Slack Message with Interactive Buttons
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send_slack_message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send Slack Message
+        run: |
+          # Define your Slack message in Block Kit format
+          MESSAGE='{
+            "channel": "#aws-deployments",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "Hello @Anubhav Sanyal , do you want to proceed ahead with the deployment of Lambda Function ?"
+                },
+                "accessory": {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Yes",
+                        "emoji": true
+                      },
+                      "style": "primary",
+                      "action_id": "yes_button"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "No",
+                        "emoji": true
+                      },
+                      "style": "danger",
+                      "action_id": "no_button"
+                    }
+                  ]
+                }
+              }
+            ]
+          }'
+
+          # Send the message to Slack using curl and the Slack API
+          curl -X POST -H "Content-type: application/json" --data "$MESSAGE" "https://slack.com/api/chat.postMessage?token=YOUR_SLACK_TOKEN"
+
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
