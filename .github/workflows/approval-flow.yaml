@@ -25,7 +25,7 @@ jobs:
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": "Hello @Anubhav Sanyal! Lambda Function deployment has been triggered. Do you want to approve the pipeline?"
+                        "text": "Hello <@U048NU0SXCJ>! Lambda Function deployment has been triggered. Do you want to approve the pipeline? Sayonara!"
                     }
                 },
                 {
