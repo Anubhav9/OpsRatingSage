@@ -1,4 +1,4 @@
-name: Send Slack Message
+name: Send Slack Message for approval
 
 on:
   push:
