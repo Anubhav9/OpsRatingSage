@@ -1,62 +1,62 @@
-name: Send Slack Message with Interactive Buttons
+name: Send Slack Message
 
 on:
   push:
     branches:
-      - main
+      - main  # Change this to the branch you want to trigger the action on
 
 jobs:
-  send_slack_message:
+  send-message:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Send Slack Message
-        run: |
-          # Define your Slack message in Block Kit format
-          MESSAGE='{
+    - name: Send Slack Message
+      run: |
+        curl --location 'https://slack.com/api/chat.postMessage' \
+        --header 'Content-type: application/json' \
+        --header 'Authorization: Bearer ${{ secrets.SLACK_API_TOKEN }}' \
+        --data '{
             "channel": "#aws-deployments",
             "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "Hello @Anubhav Sanyal , do you want to proceed ahead with the deployment of Lambda Function ?"
-                },
-                "accessory": {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "Yes",
-                        "emoji": true
-                      },
-                      "style": "primary",
-                      "action_id": "yes_button"
-                    },
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "No",
-                        "emoji": true
-                      },
-                      "style": "danger",
-                      "action_id": "no_button"
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Hello @Anubhav Sanyal! Lambda Function deployment has been triggered. Do you want to approve the pipeline?"
                     }
-                  ]
+                },
+                {
+                    "type":"actions",
+                    "elements":[
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "text": "Yes"
+                            },
+                            "style": "primary",
+                            "action_id": "yes_button"
+                        }
+                    ]
+                },
+                {
+                    "type": "actions", 
+                    "elements": [
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "text": "No"
+                            },
+                            "style": "danger",
+                            "action_id": "no_button"
+                        }
+                    ]
                 }
-              }
             ]
-          }'
-          curl -X POST -H "Content-type: application/json" \
-               -H "Authorization: Bearer $SLACK_API_TOKEN" \
-               --data "$MESSAGE" "https://slack.com/api/chat.postMessage"
-
-
-        env:
-          SLACK_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
+        }'
+      env:
+        SLACK_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
