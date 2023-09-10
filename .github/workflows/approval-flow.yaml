@@ -53,9 +53,10 @@ jobs:
               }
             ]
           }'
+          curl -X POST -H "Content-type: application/json" \
+               -H "Authorization: Bearer $SLACK_API_TOKEN" \
+               --data "$MESSAGE" "https://slack.com/api/chat.postMessage"
 
-          # Send the message to Slack using curl and the Slack API
-          curl -X POST -H "Content-type: application/json" --data "$MESSAGE" "https://slack.com/api/chat.postMessage?token=YOUR_SLACK_TOKEN"
 
         env:
           SLACK_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
