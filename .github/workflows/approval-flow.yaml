@@ -17,7 +17,7 @@ jobs:
       run: |
         curl --location 'https://slack.com/api/chat.postMessage' \
         --header 'Content-type: application/json' \
-        --header 'Authorization: Bearer ${{ secrets.SLACK_API_TOKEN }}' \
+        --header 'Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}' \
         --data '{
             "channel": "#aws-deployments",
             "blocks": [
@@ -58,5 +58,3 @@ jobs:
                 }
             ]
         }'
-      env:
-        SLACK_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
